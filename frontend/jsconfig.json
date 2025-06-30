@@ -1,0 +1,11 @@
+// Copyright (c) 2025 David Bertet. Licensed under the MIT License.
+
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["./src/*"],
+      "$lib/*": ["./$lib/*"]
+    }
+  }
+}
