@@ -22,6 +22,9 @@ export default defineConfig(({ mode }) => {
           ]
         : []),
     ],
+
+    base: isGithub ? `/${process.env.GITHUB_REPOSITORY?.split('/')[1]}/` : '/',
+
     build: {
       outDir: 'dist',
       ...(isGithub
