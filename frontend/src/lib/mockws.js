@@ -22,11 +22,13 @@ window.WebSocket = class MockWebSocket extends EventTarget {
     } catch (e) {
       return
     }
-    const mockResponse = this.generateMockResponse(data)
+    const mockResponses = this.generateMockResponse(data)
 
     setTimeout(() => {
-      this.dispatchEvent(new MessageEvent('message', { data: mockResponse }))
-    }, 200)
+      mockResponses.forEach((response) => {
+        this.dispatchEvent(new MessageEvent('message', { data: response }))
+      })
+    }, 500)
   }
 
   close() {

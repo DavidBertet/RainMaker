@@ -15,10 +15,12 @@ wss.on('connection', (ws) => {
       return
     }
     setTimeout(() => {
-      const mockResponse = generateMockResponse(data)
+      const mockResponses = generateMockResponse(data)
 
-      ws.send(JSON.stringify(mockResponse))
-    }, 1000)
+      mockResponses.forEach((response) => {
+        ws.send(JSON.stringify(response))
+      })
+    }, 500)
   })
 })
 

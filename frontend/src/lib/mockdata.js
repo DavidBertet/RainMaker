@@ -3,17 +3,21 @@
 export function generateMockResponse(data) {
   switch (data.type) {
     case 'ping':
-      return {
-        type: 'pong',
-      }
+      return [
+        {
+          type: 'pong',
+        },
+      ]
 
     case 'time_update':
-      return {
-        type: 'time_update_response',
-        success: true,
-        current_time: Math.floor(Date.now() / 1000),
-        formatted_time: new Date().toISOString(),
-      }
+      return [
+        {
+          type: 'time_update_response',
+          success: true,
+          current_time: Math.floor(Date.now() / 1000),
+          formatted_time: new Date().toISOString(),
+        },
+      ]
 
     case 'wifi_scan':
       // Generate 3-6 random networks
@@ -24,38 +28,61 @@ export function generateMockResponse(data) {
         rssi: -30 - Math.floor(Math.random() * 60), // -30 to -89
         secure: i < 3,
       }))
-      return {
-        type: 'wifi_list',
-        networks,
-      }
+      return [
+        {
+          type: 'wifi_list',
+          networks,
+        },
+      ]
 
     case 'wifi_status':
-      return {
-        type: 'wifi_status',
-        status: wifiDisconnected,
-      }
+      return [
+        {
+          type: 'wifi_status',
+          status: wifiDisconnected,
+        },
+      ]
 
     case 'wifi_connect':
       if (data.password === 'password') {
-        return {
-          type: 'wifi_status',
-          status: wifiConnected,
-        }
+        settings.wifi.setup = true
+        settings.wifi.connected = true
+        return [
+          {
+            type: 'wifi_status',
+            status: wifiConnected,
+          },
+          {
+            type: 'settings',
+            ...settings,
+          },
+        ]
       } else {
-        return { type: 'error', message: 'Password incorrect' }
+        return [{ type: 'error', message: 'Password incorrect' }]
       }
 
     case 'wifi_disconnect':
-      return {
-        type: 'wifi_status',
-        status: wifiDisconnected,
-      }
+      settings.wifi.setup = false
+      settings.wifi.connected = false
+
+      return [
+        {
+          type: 'wifi_status',
+          status: wifiDisconnected,
+        },
+        {
+          type: 'settings',
+          ...settings,
+        },
+      ]
 
     case 'get_system_info':
-      return {
-        type: 'system_info',
-        settings: systemInfo,
-      }
+      return [
+        {
+          type: 'system_info',
+          settings: systemInfo,
+        },
+      ]
 
     case 'create_or_update_zone':
       if (data.zone_id) {
@@ -68,44 +95,101 @@ export function generateMockResponse(data) {
           { id: Math.floor(Math.random() * 100), name: data.name, output: data.output },
         ]
       }
-      return {
-        type: 'zone_list',
-        zones: zones,
-      }
+      return [
+        {
+          type: 'zone_list',
+          zones: zones,
+        },
+      ]
 
     case 'delete_zone':
-      let index = zones.findIndex((z) => z.id === data.zone_id)
-      zones.splice(index, 1)
-
-      return {
-        type: 'zone_list',
-        zones: zones,
-      }
+      return [
+        {
+          type: 'error',
+          message: "This demo can't delete zones",
+        },
+      ]
 
     case 'get_zones':
-      return {
-        type: 'zone_list',
-        zones: zones,
-      }
+      return [
+        {
+          type: 'zone_list',
+          zones: zones,
+        },
+      ]
 
     case 'get_programs':
-      return {
-        type: 'program_list',
-        programs: programs,
+      return [
+        {
+          type: 'program_list',
+          programs: programs,
+        },
+      ]
+
+    case 'create_or_update_program':
+      return [
+        {
+          type: 'error',
+          message: "This demo can't modify programs",
+        },
+      ]
+
+    case 'delete_program':
+      return [
+        {
+          type: 'error',
+          message: "This demo can't delete programs",
+        },
+      ]
+
+    case 'test_manual':
+      return [
+        {
+          type: 'error',
+          message: "This demo can't run programs",
+        },
+      ]
+
+    case 'enable':
+      if (data.zone_id) {
+        let index = zones.findIndex((z) => z.id === data.zone_id)
+        zones[index].enabled = data.is_enabled
+        zones[index].status = data.is_enabled ? 'idle' : 'disabled'
+        return [
+          {
+            type: 'zone_list',
+            zones: zones,
+          },
+        ]
+      } else {
+        let index = programs.findIndex((z) => z.id === data.program_id)
+        programs[index].enabled = data.is_enabled
+        return [
+          {
+            type: 'program_list',
+            programs: programs,
+          },
+        ]
       }
 
     case 'get_settings':
-      return {
-        type: 'settings',
-        ota: {
-          requiresPassword: true,
+      return [
+        {
+          type: 'settings',
+          ...settings,
         },
-        wifi: {
-          connected: false,
-          setup: true,
-        },
-      }
+      ]
   }
+}
+
+let settings = {
+  ota: {
+    requiresPassword: true,
+  },
+  wifi: {
+    connected: false,
+    setup: false,
+  },
 }
 
 let zones = [
