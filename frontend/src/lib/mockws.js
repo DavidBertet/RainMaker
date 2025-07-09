@@ -1,17 +1,26 @@
 // Copyright (c) 2025 David Bertet. Licensed under the MIT License.
 
-const { generateMockResponse } = require('./src/lib/mockdata.js')
+import { generateMockResponse } from 'src/lib/mockdata.js'
 
 window.WebSocket = class MockWebSocket extends EventTarget {
   constructor(url) {
     super()
     this.url = url
     this.readyState = WebSocket.CONNECTING
+    this.onopen = null
+    this.onmessage = null
+    this.onclose = null
+    this.onerror = null
 
     // Simulate connection opening
     setTimeout(() => {
       this.readyState = WebSocket.OPEN
-      this.dispatchEvent(new Event('open'))
+      const event = new Event('open')
+      this.dispatchEvent(event)
+
+      if (this.onopen) {
+        this.onopen(event)
+      }
     }, 100)
   }
 
@@ -22,17 +31,27 @@ window.WebSocket = class MockWebSocket extends EventTarget {
     } catch (e) {
       return
     }
-    const mockResponses = this.generateMockResponse(data)
+    const mockResponses = generateMockResponse(data)
 
     setTimeout(() => {
       mockResponses.forEach((response) => {
-        this.dispatchEvent(new MessageEvent('message', { data: response }))
+        const event = new MessageEvent('message', { data: JSON.stringify(response) })
+        this.dispatchEvent(event)
+
+        if (this.onmessage) {
+          this.onmessage(event)
+        }
       })
     }, 500)
   }
 
   close() {
     this.readyState = WebSocket.CLOSED
-    this.dispatchEvent(new Event('close'))
+    const event = new Event('close')
+    this.dispatchEvent(event)
+
+    if (this.onclose) {
+      this.onclose(event)
+    }
   }
 }

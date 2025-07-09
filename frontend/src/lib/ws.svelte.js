@@ -2,7 +2,7 @@
 
 if (import.meta.env.MODE === 'github') {
   // Import mock only in github build
-  require('./mockws.js')
+  await import('./mockws.js')
 }
 
 // Store for connection status

@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: 'dist',
       ...(isGithub
-        ? {}
+        ? { target: 'es2022' }
         : {
             // Put all files at the same place
             assetsDir: '',
