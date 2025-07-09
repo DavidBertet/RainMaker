@@ -13,6 +13,7 @@
   import SidebarNav from 'src/components/nav/SidebarNav.svelte'
   import DarkModeToggle from 'src/components/common/DarkModeToggle.svelte'
   import DisconnectedOverlay from 'src/components/nav/DisconnectedOverlay.svelte'
+  import DemoPill from 'src/components/common/DemoPill.svelte'
 
   import { onMount, onDestroy } from 'svelte'
   import {
@@ -235,3 +236,7 @@
     </AlertDialog.Content>
   </AlertDialog.Root>
 </div>
+
+{#if import.meta.env.MODE === 'github'}
+  <DemoPill />
+{/if}
