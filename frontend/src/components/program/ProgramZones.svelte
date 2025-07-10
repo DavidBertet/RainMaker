@@ -42,7 +42,7 @@
       {@const isRunning = program.status === 'running' && zone?.status === 'running'}
       {@const progression = getZoneProgression(program, zones, programZone, currentTime)}
 
-      <div class="relative w-full sm:min-w-0 sm:flex-1">
+      <div class="relative w-full lg:min-w-0 lg:flex-1">
         <div
           class={`
           relative overflow-hidden flex items-center justify-between p-2 rounded-md border

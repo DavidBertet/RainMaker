@@ -1,5 +1,7 @@
 // Copyright (c) 2025 David Bertet. Licensed under the MIT License.
 
+let isConnected = false
+
 export function generateMockResponse(data) {
   switch (data.type) {
     case 'ping':
@@ -39,12 +41,13 @@ export function generateMockResponse(data) {
       return [
         {
           type: 'wifi_status',
-          status: wifiDisconnected,
+          status: isConnected ? wifiConnected : wifiDisconnected,
         },
       ]
 
     case 'wifi_connect':
       if (data.password === 'password') {
+        isConnected = true
         settings.wifi.setup = true
         settings.wifi.connected = true
         return [
@@ -58,10 +61,13 @@ export function generateMockResponse(data) {
           },
         ]
       } else {
-        return [{ type: 'error', message: 'Password incorrect' }]
+        return [
+          { type: 'error', message: 'Password incorrect! Can you guess what my "password" is?' },
+        ]
       }
 
     case 'wifi_disconnect':
+      isConnected = false
       settings.wifi.setup = false
       settings.wifi.connected = false
 
@@ -299,7 +305,7 @@ let systemInfo = {
     status: 'Online and operational',
     reset_reason: 'Power-on reset',
     uptime: '5 minutes, 42seconds',
-    time: '2025-01-01 00:00 PM',
+    time: new Date().toLocaleString('en-US'),
   },
   system: { idf_version: '5.4.0', freertos_tasks: 12 },
   hardware: {

@@ -31,7 +31,7 @@
       <span>at {program.schedule.startTime}</span>
     </div>
   </div>
-  <Badge variant="secondary" class="text-primary">
+  <Badge variant="secondary" class="hidden sm:inline text-primary">
     Total: {totalDuration} min
   </Badge>
 </div>

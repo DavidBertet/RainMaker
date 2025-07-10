@@ -59,7 +59,7 @@
     <div class="h-18 w-full"></div>
 
     <div
-      class="absolute top-0 left-[-16px] shadow-[6px_0_12px_rgba(0,0,0,0.15)] dark:shadow-[6px_0_12px_rgba(0,0,0,0.3)] w-4 h-full"
+      class="hidden md:inline absolute top-0 left-[-16px] shadow-[6px_0_12px_rgba(0,0,0,0.15)] dark:shadow-[6px_0_12px_rgba(0,0,0,0.3)] w-4 h-full"
     ></div>
     <div
       class="absolute bottom-0 shadow-[0_-6px_12px_rgba(0,0,0,0.15)] dark:shadow-[0_-6px_12px_rgba(0,0,0,0.3)] rounded-t-xl h-4 w-full bg-background"

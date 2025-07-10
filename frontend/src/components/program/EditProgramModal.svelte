@@ -181,7 +181,7 @@
             disabled={workingProgram.zones.length >= zones.length}
           >
             <Plus class="h-4 w-4 mr-2" />
-            Create Zone
+            Add Zone
           </Button>
         </div>
 

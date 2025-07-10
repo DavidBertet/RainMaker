@@ -42,7 +42,7 @@
 
   const isDev = import.meta.env.DEV
 
-  let activeTab = $state(new URLSearchParams(window.location.search).get('tab') || 'zones')
+  let activeTab = $state(new URLSearchParams(window.location.search).get('tab') || 'programs')
   let errorMessage = $state(null)
   let errorUnsub = $state(null)
   let settingsUnsub = $state(null)
@@ -98,16 +98,16 @@
 
   const tabs = [
     {
-      id: 'zones',
-      label: 'Zones',
-      icon: Target,
-      component: ZonesTab,
-    },
-    {
       id: 'programs',
       label: 'Programs',
       icon: Calendar,
       component: ProgramsTab,
+    },
+    {
+      id: 'zones',
+      label: 'Zones',
+      icon: Target,
+      component: ZonesTab,
     },
     {
       id: 'wifi',
@@ -238,5 +238,6 @@
 </div>
 
 {#if import.meta.env.MODE === 'github'}
+  <div class="h-20"></div>
   <DemoPill />
 {/if}

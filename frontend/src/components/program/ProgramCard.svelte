@@ -131,7 +131,7 @@
 
     <ProgramZones {program} {zones} {currentTime} />
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+    <div class="grid grid-cols-2 gap-4 text-sm">
       <div class="space-y-1">
         <div class="text-muted-foreground font-medium">Last Run</div>
         <DateLabel class="text-foreground font-medium" timestampSeconds={program.lastRun} />

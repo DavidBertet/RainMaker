@@ -130,7 +130,7 @@
     {#if zones.length !== 0}
       <Button onclick={() => (showAddModal = true)}>
         <Plus />
-        <span class="hidden md:inline">Create Program</span>
+        <span class="hidden sm:inline">Create Program</span>
       </Button>
     {/if}
   </div>

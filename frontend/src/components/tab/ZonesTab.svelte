@@ -95,7 +95,7 @@
     <SectionHeader title="Zones" subtitle="Separate watering areas in your irrigation system" />
     <Button onclick={addZone}>
       <Plus />
-      Create Zone
+      <span class="hidden sm:inline">Create Zone</span>
     </Button>
   </div>
 
