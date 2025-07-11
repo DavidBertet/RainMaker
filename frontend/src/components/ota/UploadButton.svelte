@@ -5,6 +5,8 @@
   import { Upload } from 'lucide-svelte'
   import UploadDialog from 'src/components/ota/UploadDialog.svelte'
 
+  let { ...restProps } = $props()
+
   let selectedFiles = $state(null)
   let isUploadBounce = $state(false)
   let fileInputRef = $state(null)
@@ -48,7 +50,7 @@
   }
 </script>
 
-<div class="relative">
+<div {...restProps}>
   <Button
     variant="ghost"
     size="icon"

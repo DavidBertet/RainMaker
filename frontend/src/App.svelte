@@ -146,13 +146,19 @@
         class="bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800"
       >
         <!-- Sidebar Header -->
-        <div class="flex items-center gap-3 px-6 py-4 border-b border-border/40">
-          <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500 text-white">
-            <Droplets class="size-5" />
+        <div class="flex items-center">
+          <div class="flex items-center gap-3 px-6 py-4 border-b border-border/40">
+            <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500 text-white">
+              <Droplets class="size-5" />
+            </div>
+            <div class="flex flex-col">
+              <span class="font-semibold text-sm text-foreground">RainMaker</span>
+              <span class="text-xs text-muted-foreground">Control Panel</span>
+            </div>
           </div>
-          <div class="flex flex-col">
-            <span class="font-semibold text-sm text-foreground">RainMaker</span>
-            <span class="text-xs text-muted-foreground">Control Panel</span>
+
+          <div class="flex flex-1 justify-end pe-3">
+            <UploadButton class="inline sm:hidden" />
           </div>
         </div>
 
@@ -181,7 +187,7 @@
 
             <div class="flex flex-1 justify-end items-center gap-3">
               <DarkModeToggle />
-              <UploadButton />
+              <UploadButton class="hidden sm:inline" />
               <WebsocketStatus />
             </div>
           </div>
