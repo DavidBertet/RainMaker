@@ -1,33 +1,54 @@
-```swift
- ___      _      __  __      _
-| _ \__ _(_)_ _ |  \/  |__ _| |_____ _ _
-|   / _` | | ' \| |\/| / _` | / / -_) '_|
-|_|_\__,_|_|_||_|_|  |_\__,_|_\_\___|_|
-```
+# RainMaker: ESP32 Sprinkler Controller
 
 <div align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge" alt="Version">
-  <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/status-active-brightgreen?style=for-the-badge" alt="Status">
-</div>
+  <img src="https://img.shields.io/badge/version-1.0.0-blue" alt="Version">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
+  <img src="https://img.shields.io/badge/status-active-brightgreen" alt="Status">
+</div><br/>
 
----
+A modern, open-source sprinkler controller for ESP32. Easily manage irrigation zones and schedules with a sleek web interface and robust backend.
 
-This is a sprinkler controller designed to manage irrigation systems. It features a lightweight frontend to define zones and programs, and is running on an ESP32.
+## 🌟 Features
 
-Try the [sample](https://davidbertet.github.io/RainMaker/) to see what it is capable of!
+- Define irrigation zones and custom watering programs
+- WiFi connection flow for easy setup
+- OTA (Over-the-Air) updates for future maintenance
+- CLI tool for easy installation and updates
+- Fully mobile-friendly interface for use on any device
+
+Try the [web sample](https://davidbertet.github.io/RainMaker/) to see what it is capable of!
 
 [![Web Sample](./assets/programs_preview.jpg)](https://davidbertet.github.io/RainMaker/)
 
+## ⚙️ Requirements
+
+- ESP32 development board
+- PlatformIO (for backend build)
+- Node.js & npm (for frontend build)
+
 ## 🚀 Quick Start
 
-Use the cli to install it on your ESP32 by running `./install.sh`
+1. **Clone the repository**
+   ```shell
+   git clone https://github.com/davidbertet/RainMaker.git
+   cd RainMaker
+   ```
+2. **Install on your ESP32**
 
-![CLI Sample](./assets/cli_preview.gif)
+   ```shell
+   ./install.sh
+   ```
 
-Once installed once, can update over the air using the `--ota <IP>` option
+   And follow the instructions
 
-Here is how to use it
+   ![CLI Sample](./assets/cli_preview.gif)
+
+3. **Update over the air**
+   ```shell
+   ./install.sh --ota <IP>
+   ```
+
+## 📝 CLI Usage
 
 ```shell
 Usage: ./install.sh [OPTIONS]
@@ -41,15 +62,27 @@ Options:
   -h, --help                  Show this help message
 ```
 
+## 🛠️ Tech Stack
+
+- Lightweight Svelte frontend for fast performance
+- ESP-IDF backend with static file serving
+- Websocket interface for real-time updates
+
 ## 📁 Folder Architecture
 
-- **`cli/`**: Contains the CLI tool for installing/updating the project
-- **`frontend/`**: Contains the Svelte application for the user interface.
+```
+RainMaker/
+├── frontend/    # Svelte web application
+├── backend/     # ESP-IDF backend code
+├── cli/         # CLI tool for install/update
+└── assets/      # Images and media for docs
+```
 
-  - **`src/`**: Source files for the Svelte application.
-  - **`dist/`**: Compiled production files ready for deployment to the ESP32.
+## 📚 Documentation & Support
 
-- **`backend/`**: Contains the ESP32 backend code.
-  - **`src/`**: Source files for the ESP-IDF application.
-  - **`data/`**: Directory for static files served by the backend.
-  - **`platformio.ini`**: Configuration file for PlatformIO.
+- [Issues](https://github.com/davidbertet/RainMaker/issues)
+- [Sample Web UI](https://davidbertet.github.io/RainMaker/)
+
+## 📝 License
+
+This project is licensed under the MIT License.
